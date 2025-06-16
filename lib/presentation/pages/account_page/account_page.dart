@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-
 import 'package:go_router/go_router.dart';
 
-class HomePage extends StatelessWidget{
+class AccountPage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.indigo,
-        title: Text('Главная страница', style: TextStyle(color: Colors.white),),
+        title: Text('Ваш аккаунт', style: TextStyle(color: Colors.white),),
       ),
       body: Center(
-        child: Text('Добро пожаловать',
-        style: TextStyle(fontSize: 24),),
+        child: Text('Информация пользователя', style: TextStyle(fontSize: 24),),
       ),
-      bottomNavigationBar: BottomAppBar(
+            bottomNavigationBar: BottomAppBar(
         color: Colors.indigo,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -30,14 +28,14 @@ class HomePage extends StatelessWidget{
               icon: Icon(Icons.add_circle, color: Colors.white,),
               iconSize: 50,
               onPressed: () {
-                print('добавить');
+                context.go('/home_page');
               },
             ),
             IconButton(
               icon: Icon(Icons.account_circle, color: Colors.white,),
               iconSize: 50,
               onPressed: () {
-                context.go('/account_page');
+                print('аккаунт');
               },
             )
           ],
@@ -45,4 +43,5 @@ class HomePage extends StatelessWidget{
       ),
     );
   }
+
 }

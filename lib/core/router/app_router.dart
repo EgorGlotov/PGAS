@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:pgas/presentation/pages/account_page/account_page.dart';
 import 'package:pgas/presentation/pages/home_page/home_page.dart';
 import 'package:pgas/presentation/pages/splash_screen/splash_screen.dart';
 
@@ -10,6 +11,9 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: '/home_page', builder: (context, state) => HomePage(),
+        ),
+      GoRoute(
+        path: '/account_page', builder: (context, state) => AccountPage(),
         )
   ]
   );
