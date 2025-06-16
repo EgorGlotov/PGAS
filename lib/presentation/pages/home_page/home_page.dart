@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.save_alt, color: Colors.amber,),
+              icon: Icon(Icons.save_alt, color: Colors.white,),
               onPressed: () {
                 print('скачать');
               },
