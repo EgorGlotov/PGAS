@@ -1,8 +1,17 @@
+import 'package:hive/hive.dart';
 import 'package:pgas/domain/entities/card_entities/card_entities.dart';
 
+part 'event_model.g.dart';
+
+@HiveType(typeId: 0)
 class CardModel {
+  @HiveField(0)
   final String id;
+  
+  @HiveField(1)
   final String title;
+  
+  @HiveField(2)
   final String description;
 
   CardModel({
@@ -12,26 +21,18 @@ class CardModel {
   });
 
   factory CardModel.fromEntity(CardEntity entity) {
-    return CardModel(id: entity.id, title: entity.title, description: entity.description);
+    return CardModel(
+      id: entity.id, 
+      title: entity.title, 
+      description: entity.description
+    );
   }
 
   CardEntity toEntity() {
-    return CardEntity(id: id, title: title, description: description);
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-    };
-  }
-
-  factory CardModel.fromMap(Map<String, dynamic> map) {
-    return CardModel(
-      id: map['id'],
-      title: map['title'],
-      description: map['description']
+    return CardEntity(
+      id: id, 
+      title: title, 
+      description: description
     );
   }
 }

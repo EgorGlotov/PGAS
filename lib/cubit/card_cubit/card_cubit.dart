@@ -2,44 +2,42 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pgas/cubit/card_cubit/card_cubit_state.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 import 'package:pgas/repository/card_repository/card_repository.dart';
+import 'package:uuid/uuid.dart';
 
 class CardCubit extends Cubit<CardCubitState> {
   final CardRepository _repository;
 
-  CardCubit(this._repository) : super(CardCubitInitial());
+  CardCubit(this._repository) : super(CardCubitInitial()) {
+    loadEvent(); // Автоматическая загрузка при создании
+  }
 
   Future<void> loadEvent() async {
     emit(CardCubitLoading());
     try {
-      final List<CardModel> events = await _repository.getEvent(); // Указан тип
-      emit(CardCubitLoaded(events)); // Исправлена скобка
+      final events = await _repository.getEvent();
+      emit(CardCubitLoaded(events));
     } catch (e) {
       emit(CardCubitError(e.toString()));
     }
   }
 
   Future<void> addEvent(String title, String description) async {
-    try {
-      final newEvent = CardModel(
-        id: DateTime.now().millisecondsSinceEpoch.toString(),
-        title: title,
-        description: description,
-      );
-      await _repository.addEvent(newEvent);
-      await loadEvent();
-    } catch (e) {
-      emit(CardCubitError(e.toString()));
-    }
+  try {
+    final newEvent = CardModel(
+      id: const Uuid().v4(), // Генерация UUID вместо временной метки
+      title: title,
+      description: description,
+    );
+    await _repository.addEvent(newEvent);
+    await loadEvent();
+  } catch (e) {
+    emit(CardCubitError(e.toString()));
   }
+}
 
-  Future<void> changeEventStatus(CardModel event) async { // Исправлено имя параметра
+  Future<void> changeEventStatus(CardModel event) async {
     try {
-      final updatedEvent = CardModel(
-        id: event.id,
-        title: event.title,
-        description: event.description,
-      );
-      await _repository.updateEvent(updatedEvent);
+      await _repository.updateEvent(event);
       await loadEvent();
     } catch (e) {
       emit(CardCubitError(e.toString()));

@@ -1,28 +1,30 @@
+import 'package:hive/hive.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class CardRepository {
-  final List<CardModel> _event = [];
+  static const String _boxName = 'eventsBox';
 
-  // Получение всех задач (как Future)
+  Future<Box<CardModel>> get _box async {
+    return await Hive.openBox<CardModel>(_boxName);
+  }
+
   Future<List<CardModel>> getEvent() async {
-    return Future.value(_event);
+    final box = await _box;
+    return box.values.toList();
   }
 
-  // Добавление новой задачи
   Future<void> addEvent(CardModel event) async {
-    _event.add(event);
+    final box = await _box;
+    await box.put(event.id, event);
   }
 
-  // Обновление задачи
   Future<void> updateEvent(CardModel updatedEvent) async {
-    final index = _event.indexWhere((event) => event.id == updatedEvent.id);
-    if (index != -1) {
-      _event[index] = updatedEvent;
-    }
+    final box = await _box;
+    await box.put(updatedEvent.id, updatedEvent);
   }
 
-  // Удаление задачи
   Future<void> deleteEvent(String eventId) async {
-    _event.removeWhere((event) => event.id == eventId);
+    final box = await _box;
+    await box.delete(eventId);
   }
 }
