@@ -1,28 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class CardRepository {
-  final List<CardModel> _event = [];
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Получение всех задач (как Future)
-  Future<List<CardModel>> getEvent() async {
-    return Future.value(_event);
+  Future<List<EventModel>> getEvents() async {
+    final snapshot = await _firestore.collection('events').get();
+    return snapshot.docs.map(EventModel.fromFirestore).toList();
   }
 
-  // Добавление новой задачи
-  Future<void> addEvent(CardModel event) async {
-    _event.add(event);
+  Future<void> addEvent(EventModel event) async {
+    await _firestore.collection('events').doc(event.id).set({
+      'eventName': event.eventName,
+      'eventDate': event.eventDate,
+      'activityType': event.activityType,
+      'achievementStatus': event.achievementStatus,
+      'achievementLevel': event.achievementLevel,
+      'documentProof': event.documentProof,
+      'points': event.points,
+    });
   }
 
-  // Обновление задачи
-  Future<void> updateEvent(CardModel updatedEvent) async {
-    final index = _event.indexWhere((event) => event.id == updatedEvent.id);
-    if (index != -1) {
-      _event[index] = updatedEvent;
-    }
-  }
-
-  // Удаление задачи
   Future<void> deleteEvent(String eventId) async {
-    _event.removeWhere((event) => event.id == eventId);
+    await _firestore.collection('events').doc(eventId).delete();
   }
 }
