@@ -1,30 +1,27 @@
-import 'package:hive/hive.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class CardRepository {
-  static const String _boxName = 'eventsBox';
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<Box<CardModel>> get _box async {
-    return await Hive.openBox<CardModel>(_boxName);
+  Future<List<EventModel>> getEvents() async {
+    final snapshot = await _firestore.collection('events').get();
+    return snapshot.docs.map(EventModel.fromFirestore).toList();
   }
 
-  Future<List<CardModel>> getEvent() async {
-    final box = await _box;
-    return box.values.toList();
-  }
-
-  Future<void> addEvent(CardModel event) async {
-    final box = await _box;
-    await box.put(event.id, event);
-  }
-
-  Future<void> updateEvent(CardModel updatedEvent) async {
-    final box = await _box;
-    await box.put(updatedEvent.id, updatedEvent);
+  Future<void> addEvent(EventModel event) async {
+    await _firestore.collection('events').doc(event.id).set({
+      'eventName': event.eventName,
+      'eventDate': event.eventDate,
+      'activityType': event.activityType,
+      'achievementStatus': event.achievementStatus,
+      'achievementLevel': event.achievementLevel,
+      'documentProof': event.documentProof,
+      'points': event.points,
+    });
   }
 
   Future<void> deleteEvent(String eventId) async {
-    final box = await _box;
-    await box.delete(eventId);
+    await _firestore.collection('events').doc(eventId).delete();
   }
 }

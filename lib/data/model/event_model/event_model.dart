@@ -1,38 +1,34 @@
-import 'package:hive/hive.dart';
-import 'package:pgas/domain/entities/card_entities/card_entities.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'event_model.freezed.dart';
 part 'event_model.g.dart';
 
-@HiveType(typeId: 0)
-class CardModel {
-  @HiveField(0)
-  final String id;
-  
-  @HiveField(1)
-  final String title;
-  
-  @HiveField(2)
-  final String description;
+@freezed
+@JsonSerializable()
+class EventModel with _$EventModel {
+  const factory EventModel({
+    required String id,
+    required String eventName,
+    required String eventDate,
+    required String activityType,
+    required String achievementStatus,
+    required String achievementLevel,
+    required String documentProof,
+    required int points,
+  }) = _EventModel;
 
-  CardModel({
-    required this.id,
-    required this.title,
-    required this.description,
-  });
-
-  factory CardModel.fromEntity(CardEntity entity) {
-    return CardModel(
-      id: entity.id, 
-      title: entity.title, 
-      description: entity.description
-    );
-  }
-
-  CardEntity toEntity() {
-    return CardEntity(
-      id: id, 
-      title: title, 
-      description: description
+  factory EventModel.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return EventModel(
+      id: doc.id,
+      eventName: data['eventName'] ?? '',
+      eventDate: data['eventDate'] ?? '',
+      activityType: data['activityType'] ?? 'КТ',
+      achievementStatus: data['achievementStatus'] ?? '',
+      achievementLevel: data['achievementLevel'] ?? '',
+      documentProof: data['documentProof'] ?? '',
+      points: data['points'] ?? 0,
     );
   }
 }

@@ -7,7 +7,7 @@ class CardCubitInitial extends CardCubitState {}
 class CardCubitLoading extends CardCubitState {}
 
 class CardCubitLoaded extends CardCubitState {
-  final List<CardModel> event;
+  final List<EventModel> event;
 
   CardCubitLoaded(this.event);
 }

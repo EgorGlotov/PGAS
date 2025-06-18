@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "603251372800",
+    "project_id": "pgas-22c9e",
+    "storage_bucket": "pgas-22c9e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603251372800:android:8678bc086d026d1aeb79e5",
+        "android_client_info": {
+          "package_name": "com.example.pgas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtHHGW5deb-llC80X35BA0JLE6og72uaU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

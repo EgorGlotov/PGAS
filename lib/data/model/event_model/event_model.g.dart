@@ -3,45 +3,28 @@
 part of 'event_model.dart';
 
 // **************************************************************************
-// TypeAdapterGenerator
+// JsonSerializableGenerator
 // **************************************************************************
 
-class CardModelAdapter extends TypeAdapter<CardModel> {
-  @override
-  final int typeId = 0;
-
-  @override
-  CardModel read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return CardModel(
-      id: fields[0] as String,
-      title: fields[1] as String,
-      description: fields[2] as String,
+EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
+      id: json['id'] as String,
+      eventName: json['eventName'] as String,
+      eventDate: json['eventDate'] as String,
+      activityType: json['activityType'] as String,
+      achievementStatus: json['achievementStatus'] as String,
+      achievementLevel: json['achievementLevel'] as String,
+      documentProof: json['documentProof'] as String,
+      points: (json['points'] as num).toInt(),
     );
-  }
 
-  @override
-  void write(BinaryWriter writer, CardModel obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.description);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is CardModelAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
+Map<String, dynamic> _$EventModelToJson(EventModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'eventName': instance.eventName,
+      'eventDate': instance.eventDate,
+      'activityType': instance.activityType,
+      'achievementStatus': instance.achievementStatus,
+      'achievementLevel': instance.achievementLevel,
+      'documentProof': instance.documentProof,
+      'points': instance.points,
+    };
