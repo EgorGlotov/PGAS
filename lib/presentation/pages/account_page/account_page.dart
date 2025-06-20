@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
 
 class AccountPage extends StatelessWidget{
   @override
@@ -8,6 +10,17 @@ class AccountPage extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Colors.indigo,
         title: Text('Ваш аккаунт', style: TextStyle(color: Colors.white),),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.exit_to_app, color: Colors.white,),
+              iconSize: 45,
+              onPressed: () {
+                context.go('/start');
+                context.read<AuthCubit>().signOut();
+                
+              },
+            ),
+        ],
       ),
       body: Center(
         child: Text('Информация пользователя', style: TextStyle(fontSize: 24),),

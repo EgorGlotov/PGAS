@@ -1,27 +1,64 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class CardRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore;
+  final FirebaseAuth _auth;
+
+  CardRepository({
+    FirebaseFirestore? firestore,
+    FirebaseAuth? auth,
+  })  : _firestore = firestore ?? FirebaseFirestore.instance,
+        _auth = auth ?? FirebaseAuth.instance;
+
+  String get _userId => _auth.currentUser?.uid ?? '';
 
   Future<List<EventModel>> getEvents() async {
-    final snapshot = await _firestore.collection('events').get();
-    return snapshot.docs.map(EventModel.fromFirestore).toList();
+    if (_userId.isEmpty) return [];
+    
+    try {
+      final snapshot = await _firestore
+          .collection('users')
+          .doc(_userId)
+          .collection('events')
+          .get();
+
+      return snapshot.docs
+          .map((doc) => EventModel.fromFirestore(doc))
+          .toList();
+    } catch (e) {
+      throw Exception('Failed to load events: ${e.toString()}');
+    }
   }
 
   Future<void> addEvent(EventModel event) async {
-    await _firestore.collection('events').doc(event.id).set({
-      'eventName': event.eventName,
-      'eventDate': event.eventDate,
-      'activityType': event.activityType,
-      'achievementStatus': event.achievementStatus,
-      'achievementLevel': event.achievementLevel,
-      'documentProof': event.documentProof,
-      'points': event.points,
-    });
+    if (_userId.isEmpty) return;
+    
+    try {
+      await _firestore
+          .collection('users')
+          .doc(_userId)
+          .collection('events')
+          .doc(event.id)
+          .set(event.toFirestore());
+    } catch (e) {
+      throw Exception('Failed to add event: ${e.toString()}');
+    }
   }
 
   Future<void> deleteEvent(String eventId) async {
-    await _firestore.collection('events').doc(eventId).delete();
+    if (_userId.isEmpty) return;
+    
+    try {
+      await _firestore
+          .collection('users')
+          .doc(_userId)
+          .collection('events')
+          .doc(eventId)
+          .delete();
+    } catch (e) {
+      throw Exception('Failed to delete event: ${e.toString()}');
+    }
   }
 }

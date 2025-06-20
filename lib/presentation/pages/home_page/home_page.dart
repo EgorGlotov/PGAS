@@ -8,6 +8,7 @@ import 'package:pgas/presentation/pages/event_card/event_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+  static const String path = '/home_page ';
 
   @override
   Widget build(BuildContext context) {
