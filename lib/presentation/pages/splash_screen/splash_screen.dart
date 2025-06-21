@@ -3,9 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
-import 'package:pgas/cubit/auth_cubit/auth_cubit_state.dart';
-import 'package:pgas/presentation/pages/home_page/home_page.dart';
-import 'package:pgas/presentation/pages/start_page/start_page.dart';
 
 class SplashScreen extends StatefulWidget{
   const SplashScreen({super.key});
