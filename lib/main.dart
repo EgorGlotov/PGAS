@@ -15,26 +15,22 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    BlocProvider(
-      create: (context) => CardCubit(CardRepository()),
-      child: const MyApp(),
-    ),
-  );
+  
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  
-@override
+
+  @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-      create: (context) => UserCubit()..loadUser(),
+          create: (context) => AuthCubit(FirebaseAuth.instance),
         ),
         BlocProvider(
-          create: (context) => AuthCubit(FirebaseAuth.instance),
+          create: (context) => UserCubit()..init(),
         ),
         BlocProvider(
           create: (context) => CardCubit(
@@ -46,7 +42,11 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         routerConfig: AppRouter.router,
+        theme: ThemeData(
+          primarySwatch: Colors.indigo,
+        ),
       ),
     );
   }

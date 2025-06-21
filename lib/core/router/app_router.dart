@@ -11,7 +11,7 @@ abstract class AppRouter {
   static final GoRouter router = 
   GoRouter(initialLocation: '/splash_screen', routes: [
     GoRoute(
-      path: '/splash_screen', builder: (context, state) => SplashScreen()
+      path: '/splash_screen', builder: (context, state) => SplashScreensGate()
       ),
       GoRoute(
       path: '/auth',

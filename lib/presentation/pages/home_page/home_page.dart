@@ -46,12 +46,12 @@ class HomePage extends StatelessWidget {
               onPressed: () => context.read<CardCubit>().loadEvents(),
             ),
             IconButton(
-              icon: const Icon(Icons.add_circle, color: Colors.white),
+              icon: const Icon(Icons.home, color: Colors.white),
               iconSize: 50,
               onPressed: () => _showAddEventDialog(context),
             ),
             IconButton(
-              icon: const Icon(Icons.account_circle, color: Colors.white),
+              icon: const Icon(Icons.person, color: Colors.white),
               iconSize: 50,
               onPressed: () => context.go('/account_page'),
             ),
