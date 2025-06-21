@@ -5,6 +5,7 @@ part 'event_model.freezed.dart';
 part 'event_model.g.dart';
 
 @freezed
+@JsonSerializable()
 class EventModel with _$EventModel {
   const EventModel._(); // Необходим для кастомных методов
 
@@ -50,5 +51,5 @@ class EventModel with _$EventModel {
   // Дополнительные методы для удобной работы с датой
   DateTime get parsedDate => DateTime.tryParse(eventDate) ?? DateTime.now();
   String toIsoDate() => parsedDate.toIso8601String();
-
+ 
 }

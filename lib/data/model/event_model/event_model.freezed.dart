@@ -14,10 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-EventModel _$EventModelFromJson(Map<String, dynamic> json) {
-  return _EventModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$EventModel {
   String get id => throw _privateConstructorUsedError;
@@ -29,9 +25,6 @@ mixin _$EventModel {
   String get achievementLevel => throw _privateConstructorUsedError;
   String get documentProof => throw _privateConstructorUsedError;
   int get points => throw _privateConstructorUsedError;
-
-  /// Serializes this EventModel to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of EventModel
   /// with the given fields replaced by the non-null parameter values.
@@ -197,7 +190,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$EventModelImpl extends _EventModel {
   const _$EventModelImpl(
       {required this.id,
@@ -209,9 +202,6 @@ class _$EventModelImpl extends _EventModel {
       required this.documentProof,
       required this.points})
       : super._();
-
-  factory _$EventModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$EventModelImplFromJson(json);
 
   @override
   final String id;
@@ -257,7 +247,6 @@ class _$EventModelImpl extends _EventModel {
             (identical(other.points, points) || other.points == points));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, eventName, eventDate,
       activityType, achievementStatus, achievementLevel, documentProof, points);
@@ -269,13 +258,6 @@ class _$EventModelImpl extends _EventModel {
   @pragma('vm:prefer-inline')
   _$$EventModelImplCopyWith<_$EventModelImpl> get copyWith =>
       __$$EventModelImplCopyWithImpl<_$EventModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$EventModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _EventModel extends EventModel {
@@ -289,9 +271,6 @@ abstract class _EventModel extends EventModel {
       required final String documentProof,
       required final int points}) = _$EventModelImpl;
   const _EventModel._() : super._();
-
-  factory _EventModel.fromJson(Map<String, dynamic> json) =
-      _$EventModelImpl.fromJson;
 
   @override
   String get id;

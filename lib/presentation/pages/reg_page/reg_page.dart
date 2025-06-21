@@ -22,7 +22,7 @@ class _RegPageState extends State<RegPage> {
     return BlocListener<AuthCubit, AuthCubitState>(
       listener: (context, state) {
         if (state is AuthCubitAuthorized) {
-          context.go('/home_page');
+          context.go('/user_info');
         } else if (state is AuthCubitUnauthorized && state.error != null) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.error!)));
