@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pgas/core/router/app_router.dart';
 import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
 import 'package:pgas/cubit/card_cubit/card_cubit.dart';
+import 'package:pgas/cubit/user_cubit/user_cubit.dart';
 import 'package:pgas/repository/card_repository/card_repository.dart';
 import 'firebase_options.dart';
 
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+      create: (context) => UserCubit()..loadUser(),
+        ),
         BlocProvider(
           create: (context) => AuthCubit(FirebaseAuth.instance),
         ),
