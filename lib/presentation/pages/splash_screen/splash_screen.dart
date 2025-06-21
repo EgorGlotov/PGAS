@@ -4,28 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
 
-class SplashScreen extends StatefulWidget{
-  const SplashScreen({super.key});
+class SplashScreensGate extends StatefulWidget {
+  const SplashScreensGate({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashScreensGate> createState() => _SplashScreensGateState();
 }
 
-
-class _SplashScreenState extends State<SplashScreen>{
-  @override 
-  void initState(){
+class _SplashScreensGateState extends State<SplashScreensGate> {
+  @override
+  void initState() {
     super.initState();
-  final authCubit = context.read<AuthCubit>();
-
-    Timer(Duration(seconds: 4),(){
-       if (authCubit.currentUser != null) {
-        // Пользователь авторизован - идем на домашнюю страницу
-        context.go('/home_page');
-      } else {
-        // Пользователь не авторизован - идем на стартовую страницу
-        context.go('/start');
-      }
+    Future.delayed(const Duration(seconds: 4), () {
+      if (!mounted) return;
+      context.read<AuthCubit>().currentUser != null
+          ? context.go("/home_page")
+          : context.go('/start');
     });
   }
    @override
@@ -46,5 +40,4 @@ class _SplashScreenState extends State<SplashScreen>{
     ); // Scaffold
   }
 }
-
 
