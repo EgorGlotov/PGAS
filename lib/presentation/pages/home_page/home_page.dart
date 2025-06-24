@@ -1,14 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:pgas/core/service/pdf_service/pdf_service.dart';
 import 'package:pgas/cubit/card_cubit/card_cubit.dart';
 import 'package:pgas/cubit/card_cubit/card_cubit_state.dart';
+import 'package:pgas/data/model/event_model/event_model.dart';
+import 'package:pgas/data/model/user_model/user_model.dart';
 import 'package:pgas/presentation/pages/event_card/event_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
   static const String path = '/home_page ';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +48,8 @@ class HomePage extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.save_alt, color: Colors.white),
               iconSize: 50,
-              onPressed: () => context.read<CardCubit>().loadEvents(),
+              onPressed: () => context.go('/pdf_page'),
+             
             ),
             IconButton(
               icon: const Icon(Icons.home, color: Colors.white),
