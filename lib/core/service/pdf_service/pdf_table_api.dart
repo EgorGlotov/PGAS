@@ -22,6 +22,9 @@ class TablePdfApi{
     final day = DateTime.now();
     final dayFormatted = DateFormat('dd.MM.yyyy').format(day);
 
+    events.sort((a, b) =>
+    DateTime.parse(a.eventDate).compareTo(DateTime.parse(b.eventDate)));
+
     final headers = ['№','Название мероприятия','Дата','Вид Деятельности*','Статус**','Уровень***','Документ****','Баллы'];
     final data = events.asMap().entries.map((entry) {
       final index = entry.key + 1;

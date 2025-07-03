@@ -16,6 +16,9 @@ class CardCubit extends Cubit<CardCubitState> {
     emit(CardCubitLoading());
     try {
       final events = await _repository.getEvents();
+      events.sort((a, b) =>
+      DateTime.parse(a.eventDate).compareTo(DateTime.parse(b.eventDate)));
+
       emit(CardCubitLoaded(events));
     } catch (e) {
       emit(CardCubitError(e.toString()));
