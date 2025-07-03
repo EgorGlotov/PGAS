@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pgas/core/service/pdf_service/pdf_service.dart';
 import 'package:pgas/core/service/pdf_service/pdf_table_api.dart';
+import 'package:pgas/cubit/user_cubit/user_cubit.dart';
+import 'package:pgas/data/model/event_model/event_model.dart';
+import 'package:pgas/repository/card_repository/card_repository.dart';
 
 class PdfPage extends StatelessWidget{
   const PdfPage({super.key});
@@ -21,7 +26,10 @@ class PdfPage extends StatelessWidget{
       const SizedBox(height: 24),
       ElevatedButton(
         onPressed: () async {
-          final tablePdf = await TablePdfApi.generateTablePdf();
+          final user = context.read<UserCubit>().state;
+          final repository = CardRepository();
+          final events = await repository.getEvents();
+          final tablePdf = await TablePdfApi.generateTablePdf(user,events);
           SaveAndOpenDocument.openPdf(tablePdf);
         },
         child: Text('Сгенерировать PDF'), // Добавлен обязательный child

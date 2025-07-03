@@ -33,6 +33,8 @@ class UserModel with _$UserModel{
     );
   }
 
+  get id => null;
+
   Map<String, dynamic>toFirestore(){
     return{
       'surname': surname,
