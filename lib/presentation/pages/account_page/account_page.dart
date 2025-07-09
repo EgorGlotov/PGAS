@@ -59,7 +59,7 @@ class AccountPage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.save_alt, color: Colors.white),
             iconSize: 50,
-            onPressed: () => context.read<CardCubit>().loadEvents(),
+            onPressed: () => context.go('/pdf_page'),
           ),
           IconButton(
             icon: const Icon(Icons.home, color: Colors.white),

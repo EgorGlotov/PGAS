@@ -47,6 +47,8 @@ dependencies:
   freezed_annotation: ^2.4.4
   intl: ^0.20.2
   shared_preferences: ^2.5.3
+  path_provider: ^2.1.5
+  open_file: ^3.5.10
   
 dev_dependencies:
   flutter_test:
@@ -74,6 +76,12 @@ flutter:
 
   assets:
     - assets/images/пггпу.png
+    - assets/font/TimesNewRomanRegular.ttf
+
+  fonts:
+    - family: Times New Roman
+      fonts:
+        - asset: assets/font/TimesNewRomanRegular.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

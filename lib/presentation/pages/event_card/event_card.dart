@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
+import 'package:pgas/cubit/card_cubit/card_cubit.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class EventCard extends StatelessWidget {
   final EventModel event;
 
   const EventCard({required this.event});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +27,14 @@ class EventCard extends StatelessWidget {
             _buildRow('Уровень:', event.achievementLevel),
             _buildRow('Документ:', event.documentProof),
             _buildRow('Баллы:', '${event.points}'),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                IconButton(onPressed:() { 
+                  context.read<CardCubit>().deleteEvent(event.id);
+                }, icon: Icon(Icons.delete, color: Colors.red,))
+              ],
+            )
           ],
         ),
       ),
