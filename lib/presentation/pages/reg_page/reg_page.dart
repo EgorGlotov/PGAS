@@ -29,25 +29,39 @@ class _RegPageState extends State<RegPage> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Registration'),
-          centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 226, 33, 243),
-          actions: [
-            TextButton(
-                onPressed: () {
-                  context.go(AuthPage.path);
-                },
-                style: ButtonStyle(
-                foregroundColor: WidgetStateProperty.all<Color>(Colors.white), // Цвет текста
-               ),
-                child: const Text('Log in'))
-                
-          ],
-        ),
         body: Center(
           child: Column(
             children: [
+              Container(
+                height: 30,
+              ),
+              Container(
+                height: 55,
+                width: 200,
+                color: const Color.fromARGB(255, 1, 52, 94),
+                child: 
+              Row(
+                children: [
+                  Container(
+                    width: 100,
+                    child: 
+              FloatingActionButton(onPressed: (){
+                print(1);
+              }, 
+              backgroundColor: Color.fromARGB(255, 1, 52, 94),
+              child: 
+              Text('Sign Up',style: TextStyle(color: Colors.white),))),
+              Container(
+                width: 100,
+                    child: 
+              FloatingActionButton(onPressed: (){
+                print(1);
+              }, 
+              backgroundColor: const Color.fromARGB(255, 17, 87, 145),
+              child: 
+              Text('Sign In', style: TextStyle(color: Colors.white),))),
+              ]),),
+              Text('Зарегистрироваться', style: TextStyle(color: Color.fromARGB(255, 1, 52, 94), fontSize: 25, fontWeight:  FontWeight.w800),),
               TextField(
                 controller: emailController,
                 decoration: const InputDecoration(label: Text('Email')),

@@ -16,6 +16,9 @@ class CardCubit extends Cubit<CardCubitState> {
     emit(CardCubitLoading());
     try {
       final events = await _repository.getEvents();
+      events.sort((a, b) =>
+      DateTime.parse(a.eventDate).compareTo(DateTime.parse(b.eventDate)));
+
       emit(CardCubitLoaded(events));
     } catch (e) {
       emit(CardCubitError(e.toString()));
@@ -29,7 +32,7 @@ class CardCubit extends Cubit<CardCubitState> {
     required String achievementStatus,
     required String achievementLevel,
     required String documentProof,
-    required int points,
+    required double points,
   }) async {
     try {
       final newEvent = EventModel(

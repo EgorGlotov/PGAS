@@ -75,7 +75,9 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/data/achievements.json
     - assets/images/пггпу.png
+    - assets/images/фон.png
     - assets/font/TimesNewRomanRegular.ttf
 
   fonts:

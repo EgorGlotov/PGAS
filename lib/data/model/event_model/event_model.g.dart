@@ -14,7 +14,7 @@ EventModel _$EventModelFromJson(Map<String, dynamic> json) => EventModel(
       achievementStatus: json['achievementStatus'] as String,
       achievementLevel: json['achievementLevel'] as String,
       documentProof: json['documentProof'] as String,
-      points: (json['points'] as num).toInt(),
+      points: (json['points'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$EventModelToJson(EventModel instance) =>

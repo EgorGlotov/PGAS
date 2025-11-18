@@ -24,7 +24,7 @@ mixin _$EventModel {
   String get achievementStatus => throw _privateConstructorUsedError;
   String get achievementLevel => throw _privateConstructorUsedError;
   String get documentProof => throw _privateConstructorUsedError;
-  int get points => throw _privateConstructorUsedError;
+  double get points => throw _privateConstructorUsedError;
 
   /// Create a copy of EventModel
   /// with the given fields replaced by the non-null parameter values.
@@ -47,7 +47,7 @@ abstract class $EventModelCopyWith<$Res> {
       String achievementStatus,
       String achievementLevel,
       String documentProof,
-      int points});
+      double points});
 }
 
 /// @nodoc
@@ -106,7 +106,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
       points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ) as $Val);
   }
 }
@@ -127,7 +127,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
       String achievementStatus,
       String achievementLevel,
       String documentProof,
-      int points});
+      double points});
 }
 
 /// @nodoc
@@ -184,7 +184,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
       points: null == points
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
     ));
   }
 }
@@ -219,7 +219,7 @@ class _$EventModelImpl extends _EventModel {
   @override
   final String documentProof;
   @override
-  final int points;
+  final double points;
 
   @override
   String toString() {
@@ -269,7 +269,7 @@ abstract class _EventModel extends EventModel {
       required final String achievementStatus,
       required final String achievementLevel,
       required final String documentProof,
-      required final int points}) = _$EventModelImpl;
+      required final double points}) = _$EventModelImpl;
   const _EventModel._() : super._();
 
   @override
@@ -287,7 +287,7 @@ abstract class _EventModel extends EventModel {
   @override
   String get documentProof;
   @override
-  int get points;
+  double get points;
 
   /// Create a copy of EventModel
   /// with the given fields replaced by the non-null parameter values.

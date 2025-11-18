@@ -30,7 +30,7 @@ class PdfPage extends StatelessWidget{
           final repository = CardRepository();
           final events = await repository.getEvents();
           final tablePdf = await TablePdfApi.generateTablePdf(user,events);
-          SaveAndOpenDocument.openPdf(tablePdf);
+          SaveAndOpenDocument.savePdf(name: 'table_pdf.pdf', pdf: tablePdf);
         },
         child: Text('Сгенерировать PDF'), // Добавлен обязательный child
       ),
