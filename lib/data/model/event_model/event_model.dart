@@ -17,7 +17,7 @@ class EventModel with _$EventModel {
     required String achievementStatus,
     required String achievementLevel,
     required String documentProof,
-    required int points,
+    required double points,
   }) = _EventModel;
 
   // Конструктор из Firestore документа
@@ -31,7 +31,7 @@ class EventModel with _$EventModel {
       achievementStatus: data['achievementStatus'] as String? ?? '',
       achievementLevel: data['achievementLevel'] as String? ?? '',
       documentProof: data['documentProof'] as String? ?? '',
-      points: (data['points'] as int?) ?? 0,
+      points: (data['points'] as double?) ?? 0,
     );
   }
 

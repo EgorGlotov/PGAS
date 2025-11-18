@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pgas/cubit/auth_cubit/auth_cubit.dart';
 import 'package:pgas/cubit/card_cubit/card_cubit.dart';
 import 'package:pgas/data/model/event_model/event_model.dart';
 
 class EventCard extends StatelessWidget {
   final EventModel event;
 
-  const EventCard({required this.event});
-  
+  const EventCard({required this.event, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,35 +17,46 @@ class EventCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(event.eventName, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              event.eventName,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             _buildRow('Дата:', event.eventDate),
             _buildRow('Вид деятельности:', event.activityType),
             _buildRow('Статус:', event.achievementStatus),
             _buildRow('Уровень:', event.achievementLevel),
             _buildRow('Документ:', event.documentProof),
-            _buildRow('Баллы:', '${event.points}'),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                IconButton(onPressed:() { 
+            _buildRow(
+              'Баллы:',
+              '${event.points}',
+              valueStyle: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.indigo,
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                onPressed: () {
                   context.read<CardCubit>().deleteEvent(event.id);
-                }, icon: Icon(Icons.delete, color: Colors.red,))
-              ],
-            )
+                },
+                icon: const Icon(Icons.delete, color: Colors.red),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildRow(String label, String value) {
+  Widget _buildRow(String label, String value, {TextStyle? valueStyle}) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
           Text('$label ', style: const TextStyle(fontWeight: FontWeight.w600)),
-          Text(value),
+          Text(value, style: valueStyle),
         ],
       ),
     );

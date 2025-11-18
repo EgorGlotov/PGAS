@@ -12,15 +12,14 @@ class CardRepository {
   })  : _firestore = firestore ?? FirebaseFirestore.instance,
         _auth = auth ?? FirebaseAuth.instance;
 
-  String get _userId => _auth.currentUser?.uid ?? '';
-
   Future<List<EventModel>> getEvents() async {
-    if (_userId.isEmpty) return [];
-    
+    final user = _auth.currentUser;
+    if (user == null) throw Exception('User not logged in');
+
     try {
       final snapshot = await _firestore
           .collection('users')
-          .doc(_userId)
+          .doc(user.uid)
           .collection('events')
           .get();
 
@@ -33,12 +32,13 @@ class CardRepository {
   }
 
   Future<void> addEvent(EventModel event) async {
-    if (_userId.isEmpty) return;
-    
+    final user = _auth.currentUser;
+    if (user == null) throw Exception('User not logged in');
+
     try {
       await _firestore
           .collection('users')
-          .doc(_userId)
+          .doc(user.uid)
           .collection('events')
           .doc(event.id)
           .set(event.toFirestore());
@@ -48,12 +48,13 @@ class CardRepository {
   }
 
   Future<void> deleteEvent(String eventId) async {
-    if (_userId.isEmpty) return;
-    
+    final user = _auth.currentUser;
+    if (user == null) throw Exception('User not logged in');
+
     try {
       await _firestore
           .collection('users')
-          .doc(_userId)
+          .doc(user.uid)
           .collection('events')
           .doc(eventId)
           .delete();
